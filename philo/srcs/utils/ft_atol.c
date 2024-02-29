@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 11:27:35 by cblonde           #+#    #+#             */
-/*   Updated: 2024/02/29 14:27:25 by cblonde          ###   ########.fr       */
+/*   Created: 2024/02/29 14:35:35 by cblonde           #+#    #+#             */
+/*   Updated: 2024/02/29 17:48:44 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# include <stdio.h>
-# include <unistd.h>
-
-/* structs */
-typedef struct s_data
+long long	ft_atol(char *str)
 {
-	int nbr_philo;
-	int	nbr_eat;
-}	t_data;
+	size_t		i;
+	long long	nbr;
+	int			sign;
 
-/*  Parsing */
-int			ft_check_args(int argc, char *argv[]);
-
-/* utils */
-size_t		ft_strlen(char *str);
-long long	ft_atol(char *str);
-
-/* error */
-int			ft_error_main(int n);
-void		ft_error_parse(int n);
-
-#endif
+	i = 0;
+	sign = 1;
+	nbr = 0;
+	if (!str)
+		return (0);
+	while (str[i] == 32 || (9 <= str[i] && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while ('0' <= str[i] && str[i] <= '9')
+	{
+		nbr = nbr * 10 + (str[i] - '0');
+		i++;
+	}
+	return (nbr * sign);
+}
