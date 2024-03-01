@@ -4,5 +4,4 @@ test*
 *.o
 *.swp
 .vscode
-pipex
 tags

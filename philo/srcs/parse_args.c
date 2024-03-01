@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:32:47 by cblonde           #+#    #+#             */
-/*   Updated: 2024/02/29 18:22:47 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/01 11:32:37 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ int	ft_check_args(int argc, char *argv[])
 	int	i;
 
 	i = 1;
-	if (argc > 0)
-		printf("Salut strlen: %lld\n",ft_atol(argv[1]));
-	if (argc != 6 || argc != 5)
+	if (argc != 6 && argc != 5)
 	{
 		ft_error_parse(0);
 		return (1);
