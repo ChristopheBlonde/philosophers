@@ -6,22 +6,11 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:25:30 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/04 15:40:27 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/08 14:49:43 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	*ft_routine(void *ptr)
-{
-	t_data	*data;
-	t_philo	*philo;
-
-	philo = (t_philo *)ptr;
-	data = (t_data *)philo->data;
-	printf("philo nbr:%d, philo_id: %ld, nbr_eat,%d\n", philo->nbr, philo->id, data->nbr_eat);
-	return (NULL);
-}
 
 int	main(int argc, char **argv)
 {
@@ -32,15 +21,26 @@ int	main(int argc, char **argv)
 	ft_init_data(&data);
 	if (ft_check_args(argc, argv, &data))
 		return (ft_error_main(0));
-	data.philo = (t_philo *)ft_calloc(data.nbr_philo + 1, sizeof(t_philo));
+	data.philo = ft_calloc(data.nbr_philo + 1, sizeof(t_philo));
+	if (!data.philo)
+		return (1);
+	data.forks = ft_calloc(data.nbr_philo + 1, sizeof(pthread_mutex_t));
+	if (!data.forks)
+	{
+		free(data.philo);
+		return (1);
+	}
 	while (i < data.nbr_philo)
 	{
-		printf("index:%d\n", i);
-		data.philo[i].nbr = i + 1;
-		data.philo[i].data = &data;
-		pthread_create(&data.philo[i].id, NULL, &ft_routine, &data.philo[i]);
-		sleep(2);
+		ft_init_philo(&data, i);
 		i++;
 	}
+	i = 0;
+	while (i < data.nbr_philo)
+	{
+		pthread_join(data.philo[i].id, NULL);
+		i++;
+	}
+	ft_free_data(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:16:32 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/04 11:23:03 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/08 19:03:30 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,32 @@ void	ft_init_data(t_data *data)
 	data->time_eat = -1;
 	data->time_sleep = -1;
 	data->time_die = -1;
+	data->philo = NULL;
+	data->forks = NULL;
+	pthread_mutex_init(&data->death, NULL);
+	pthread_mutex_init(&data->write, NULL);
+}
+
+void	ft_free_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->philo)
+	{
+		free(data->philo);
+		data->philo = NULL;
+	}
+	if (data->forks)
+	{
+		while (i < data->nbr_philo)
+		{
+			pthread_mutex_destroy(&data->forks[i]);
+			i++;
+		}
+		free(data->forks);
+		data->forks = NULL;
+	}
+	pthread_mutex_destroy(&data->death);
+	pthread_mutex_destroy(&data->write);
 }
