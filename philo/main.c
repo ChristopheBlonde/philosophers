@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:25:30 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/08 14:49:43 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:33:30 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		i;
 
-	i = 0;
 	ft_init_data(&data);
 	if (ft_check_args(argc, argv, &data))
 		return (ft_error_main(0));
@@ -30,17 +28,10 @@ int	main(int argc, char **argv)
 		free(data.philo);
 		return (1);
 	}
-	while (i < data.nbr_philo)
-	{
-		ft_init_philo(&data, i);
-		i++;
-	}
-	i = 0;
-	while (i < data.nbr_philo)
-	{
-		pthread_join(data.philo[i].id, NULL);
-		i++;
-	}
+	ft_init_philo(&data);
+	ft_run_thread(&data);
+	ft_watch_philo(&data);
+	ft_join_thread(&data);
 	ft_free_data(&data);
 	return (0);
 }
