@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:16:32 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/11 17:03:41 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 11:45:59 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_init_data(t_data *data)
 	data->forks = NULL;
 	pthread_mutex_init(&data->meal, NULL);
 	pthread_mutex_init(&data->death, NULL);
-	pthread_mutex_init(&data->status, NULL);
 	pthread_mutex_init(&data->write, NULL);
 }
 
@@ -50,6 +49,5 @@ void	ft_free_data(t_data *data)
 	}
 	pthread_mutex_destroy(&data->meal);
 	pthread_mutex_destroy(&data->death);
-	pthread_mutex_destroy(&data->status);
 	pthread_mutex_destroy(&data->write);
 }

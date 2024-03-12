@@ -6,13 +6,13 @@
 #    By: cblonde <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/28 10:59:42 by cblonde           #+#    #+#              #
-#    Updated: 2024/03/11 14:02:13 by cblonde          ###   ########.fr        #
+#    Updated: 2024/03/12 12:56:39 by cblonde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -fsanitize=thread -g
+CFLAGS = -Werror -Wextra -Wall
 
 INCLUDES = -Iinclude
 

@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:38:58 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/11 16:15:55 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 12:47:55 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	ft_run_thread(t_data *data)
 		pthread_create(&data->philo[i].id, NULL,
 			&ft_routine, &data->philo[i]);
 		usleep(1);
+		pthread_mutex_lock(&data->meal);
+		data->philo[i].last_meal = ft_get_current_time();
+		pthread_mutex_unlock(&data->meal);
 		i++;
 	}
 }
@@ -36,11 +39,7 @@ void	ft_init_philo(t_data *data)
 		data->philo[i].nbr = i + 1;
 		data->philo[i].data = data;
 		data->philo[i].start = ft_get_current_time();
-		data->philo[i].last_meal = data->philo[i].start;
-		if ((i + 1) % 2 == 0)
-			data->philo[i].status = 0;
-		else
-			data->philo[i].status = 2;
+		data->philo[i].last_meal = 0;
 		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}

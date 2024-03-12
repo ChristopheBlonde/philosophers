@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:27:35 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/11 17:01:45 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 12:21:13 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_philo
 	pthread_t		id;
 	int				nbr;
 	size_t			start;
-	int				status;
 	size_t			last_meal;
 	int				nbr_meal;
 }	t_philo;
@@ -45,7 +44,6 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	meal;
 	pthread_mutex_t	death;
-	pthread_mutex_t	status;
 	pthread_mutex_t	write;
 }	t_data;
 
