@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:27:35 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 15:12:00 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 16:06:01 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			ft_usleep(size_t time_to_wait);
 /* routine */
 void		*ft_routine(void *ptr);
 void		ft_watch_philo(t_data *data);
-void		ft_print(t_data *data, int nbr, char *str);
+void		ft_print(t_data *data, int nbr, char *str, char *color);
 
 /* error */
 int			ft_error_main(int n);

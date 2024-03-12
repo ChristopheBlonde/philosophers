@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 13:38:55 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 12:49:03 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 16:16:16 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_watch_philo(t_data *data)
 				- data->philo[i].last_meal > data->time_die)
 			{
 				pthread_mutex_unlock(&data->meal);
-				ft_print(data, i + 1, "died");
+				ft_print(data, i + 1, "died", "\033[0;32m");
 				return (ft_handle_finish(data));
 			}
 			pthread_mutex_unlock(&data->meal);
