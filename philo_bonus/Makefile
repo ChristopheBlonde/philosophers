@@ -6,7 +6,7 @@
 #    By: cblonde <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/12 13:01:47 by cblonde           #+#    #+#              #
-#    Updated: 2024/03/12 13:06:59 by cblonde          ###   ########.fr        #
+#    Updated: 2024/03/12 18:25:00 by cblonde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,14 @@ CC = gcc
 
 CFLAGS = -Werror -Wall -Wextra
 
-INCLUDE = -Linclude
+INCLUDES = -Iinclude
 
 NAME = philo_bonus
 
-SRCS = main.c
+SRCS = main.c srcs/utils/ft_atol.c srcs/utils/ft_calloc.c srcs/utils/ft_putendl_fd.c\
+	   srcs/utils/ft_strlen.c srcs/utils/ft_usleep.c srcs/parse_args.c srcs/parse_error.c\
 
-OBJS = $(SRCS:.o=.c)
+OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
 
