@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:18:44 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 12:52:57 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/12 14:59:02 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ static void	ft_start_eat(t_data *data, t_philo *philo)
 		nbr = 0;
 	pthread_mutex_lock(&data->forks[philo->nbr - 1]);
 	ft_print(data, philo->nbr, "has taken a fork");
+	if (data->nbr_philo == 1)
+	{
+		pthread_mutex_unlock(&data->forks[philo->nbr - 1]);
+		return ;
+	}
 	pthread_mutex_lock(&data->forks[nbr]);
 	ft_print(data, philo->nbr, "has taken a fork");
 	pthread_mutex_lock(&data->meal);
@@ -72,6 +77,8 @@ void	*ft_routine(void *ptr)
 		}
 		pthread_mutex_unlock(&data->death);
 		ft_start_eat(data, philo);
+		if (data->nbr_philo == 1)
+			break ;
 		ft_start_sleep(data, philo);
 		ft_print(data, philo->nbr, "is thinking");
 	}

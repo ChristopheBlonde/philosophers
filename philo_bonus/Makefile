@@ -5,24 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cblonde <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/28 10:59:42 by cblonde           #+#    #+#              #
-#    Updated: 2024/03/12 15:11:35 by cblonde          ###   ########.fr        #
+#    Created: 2024/03/12 13:01:47 by cblonde           #+#    #+#              #
+#    Updated: 2024/03/12 13:06:59 by cblonde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wall -Wextra
 
-INCLUDES = -Iinclude
+INCLUDE = -Linclude
 
-SRCS = main.c srcs/parse_error.c srcs/parse_args.c srcs/utils/ft_strlen.c srcs/utils/ft_atol.c\
-	   srcs/utils/ft_putendl_fd.c srcs/utils_data.c srcs/utils/ft_calloc.c srcs/utils/ft_usleep.c\
-	   srcs/utils_philo.c srcs/routine.c srcs/watcher.c
+NAME = philo_bonus
 
-NAME = philo
+SRCS = main.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.o=.c)
 
 all : $(NAME)
 
