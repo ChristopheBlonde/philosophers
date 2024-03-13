@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:48 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 18:27:03 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/13 19:37:45 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,37 @@
 # include <pthread.h>
 # include <string.h>
 # include <sys/time.h>
+# include <fcntl.h>
+# include <semaphore.h>
+# include <signal.h>
+# include <sys/wait.h>
 
 /* struct */
+struct	s_data;
 typedef struct s_philo
 {
 	struct s_data	*data;
-	pthread_t		id;
+	pid_t			id;
 	int				nbr;
 	size_t			start;
 	size_t			last_meal;
 	int				nbr_meal;
+	pthread_t		check_death;
 }	t_philo;
 
 typedef struct s_data
 {
-	int				nbr_philo;
-	int				nbr_eat;
-	size_t			time_eat;
-	size_t			time_sleep;
-	size_t			time_die;
-	int				finish;
-	t_philo			*philo;
+	int		nbr_philo;
+	int		nbr_eat;
+	size_t	time_eat;
+	size_t	time_sleep;
+	size_t	time_die;
+	int		finish;
+	t_philo	*philo;
+	sem_t	*meal;
+	sem_t	*write;
+	sem_t	*forks;
+	sem_t	*died;
 }	t_data;
 
 /* utils */
@@ -50,7 +60,18 @@ void		*ft_calloc(size_t count, size_t size);
 size_t		ft_get_current_time(void);
 int			ft_usleep(size_t time_to_wait);
 
+/* data */
+int			ft_check_args(int argc, char *argv[], t_data *data);
+void		ft_init_data(t_data *data);
+int			ft_init_philo(t_data *data);
+int			ft_init_sem(t_data *data);
+
 /* Error */
 int			ft_error_main(int n);
 void		ft_error_parse(int n);
+int			ft_error_init(t_data *data, int n);
+
+/* free */
+void		ft_free_struct(t_data *data);
+
 #endif
