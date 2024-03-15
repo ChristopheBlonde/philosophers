@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:10:57 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/13 19:07:23 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/14 10:20:56 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_error_init(t_data *data, int n)
 	ft_putendl_fd("\033[0;31mError \033[m", 2);
 	if (n == 0)
 	{
-		ft_putendl_fd("Error initialization", 2);
+		ft_putendl_fd("\033[0;31minitialization\033[m", 2);
 		ft_free_struct(data);
 	}
 	return (1);

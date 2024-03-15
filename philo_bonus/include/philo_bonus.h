@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:48 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/13 19:37:45 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/14 15:26:22 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			ft_check_args(int argc, char *argv[], t_data *data);
 void		ft_init_data(t_data *data);
 int			ft_init_philo(t_data *data);
 int			ft_init_sem(t_data *data);
+void		ft_sem_close(t_data *data);
 
 /* Error */
 int			ft_error_main(int n);

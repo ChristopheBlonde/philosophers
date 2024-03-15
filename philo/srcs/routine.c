@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:18:44 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 16:41:51 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/15 12:41:36 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*ft_routine(void *ptr)
 	philo = (t_philo *)ptr;
 	data = (t_data *)philo->data;
 	if (philo->nbr % 2)
-		usleep(15000);
+		usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(&data->death);

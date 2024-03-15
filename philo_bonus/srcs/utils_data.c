@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:04:45 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/13 20:11:21 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/14 17:39:06 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	ft_init_sem(t_data *data)
 	data->write = sem_open("/write", O_CREAT, S_IRWXU, 1);
 	data->meal = sem_open("/meal", O_CREAT, S_IRWXU, 1);
 	data->forks = sem_open("/forks", O_CREAT, S_IRWXU, data->nbr_philo);
-	if (!data->write || !data->meal || !data->forks)
+	data->died = sem_open("/died", O_CREAT, S_IRWXU, 1);
+	if (!data->write || !data->meal || !data->forks || !data->died)
 		return (1);
 	return (0);
 }
@@ -55,7 +56,8 @@ static void	ft_kill_pid(t_data *data)
 			i = 0;
 			while (i < data->nbr_philo)
 			{
-				kill(data->philo[i].id, 15);
+				if (data->philo[i].id)
+					kill(data->philo[i].id, 15);
 				i++;
 			}
 			break ;
@@ -64,13 +66,8 @@ static void	ft_kill_pid(t_data *data)
 	}
 }
 
-void	ft_free_struct(t_data *data)
+void	ft_sem_close(t_data *data)
 {
-	if (data->philo)
-	{
-		free(data->philo);
-		data->philo = NULL;
-	}
 	if (data->meal)
 		sem_close(data->meal);
 	if (data->write)
@@ -78,10 +75,20 @@ void	ft_free_struct(t_data *data)
 	if (data->forks)
 		sem_close(data->forks);
 	if (data->died)
-		sem_close(data->meal);
+		sem_close(data->died);
 	sem_unlink("/meal");
 	sem_unlink("/write");
 	sem_unlink("/forks");
 	sem_unlink("/died");
+}
+
+void	ft_free_struct(t_data *data)
+{
+	ft_sem_close(data);
 	ft_kill_pid(data);
+	if (data->philo)
+	{
+		free(data->philo);
+		data->philo = NULL;
+	}
 }
