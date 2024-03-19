@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:18:53 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/15 12:36:31 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/19 08:28:46 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static void	*ft_death_checker(void *philo)
 			sem_post(p->data->died);
 			ft_print(philo, "died", "\033[0;31m");
 			sem_wait(p->data->write);
+			ft_free_struct(p->data);
 			exit (1);
 		}
 		if (p->nbr_meal == p->data->nbr_eat)
-		{
 			sem_post(p->data->meal);
+		if (p->nbr_meal == p->data->nbr_eat)
 			break ;
-		}
 		sem_post(p->data->meal);
 		usleep(1000);
 	}
@@ -88,6 +88,7 @@ static void	ft_routine(t_philo *philo)
 		ft_print(philo, "is thinking", "\033[0;33m");
 	}
 	pthread_join(philo->check_death, NULL);
+	ft_free_struct(philo->data);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:04:45 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/14 17:39:06 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:03:27 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	ft_init_sem(t_data *data)
 	sem_unlink("/meal");
 	sem_unlink("/forks");
 	sem_unlink("/died");
-	data->write = sem_open("/write", O_CREAT, S_IRWXU, 1);
 	data->meal = sem_open("/meal", O_CREAT, S_IRWXU, 1);
+	data->write = sem_open("/write", O_CREAT, S_IRWXU, 1);
 	data->forks = sem_open("/forks", O_CREAT, S_IRWXU, data->nbr_philo);
 	data->died = sem_open("/died", O_CREAT, S_IRWXU, 1);
+
 	if (!data->write || !data->meal || !data->forks || !data->died)
 		return (1);
 	return (0);
@@ -48,6 +49,7 @@ static void	ft_kill_pid(t_data *data)
 	int	status;
 
 	i = 0;
+	status = 0;
 	while (i < data->nbr_philo)
 	{
 		waitpid(-1, &status, 0);
@@ -57,7 +59,7 @@ static void	ft_kill_pid(t_data *data)
 			while (i < data->nbr_philo)
 			{
 				if (data->philo[i].id)
-					kill(data->philo[i].id, 15);
+					kill(data->philo[i].id, 9);
 				i++;
 			}
 			break ;
