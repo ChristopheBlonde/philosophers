@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:18:53 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/19 08:28:46 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/19 18:14:45 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ static void	*ft_death_checker(void *philo)
 			p->data->finish = 1;
 			sem_post(p->data->died);
 			ft_print(philo, "died", "\033[0;31m");
-			sem_wait(p->data->write);
-			ft_free_struct(p->data);
-			exit (1);
+			sem_post(p->data->kill);
+			return (NULL);
 		}
 		if (p->nbr_meal == p->data->nbr_eat)
 			sem_post(p->data->meal);
@@ -70,8 +69,9 @@ static void	ft_routine(t_philo *philo)
 	philo->last_meal = ft_get_current_time();
 	pthread_create(&philo->check_death,
 		NULL, ft_death_checker, philo);
+	pthread_detach(philo->check_death);
 	if (philo->nbr % 2)
-		usleep(100);
+		usleep(10000);
 	while (1)
 	{
 		if (philo->nbr_meal > 0 && philo->nbr == 1)
@@ -87,7 +87,6 @@ static void	ft_routine(t_philo *philo)
 		ft_usleep(philo->data->time_sleep);
 		ft_print(philo, "is thinking", "\033[0;33m");
 	}
-	pthread_join(philo->check_death, NULL);
 	ft_free_struct(philo->data);
 	exit(0);
 }
@@ -97,8 +96,6 @@ int	ft_init_philo(t_data *data)
 	size_t	i;
 
 	i = 0;
-	if (ft_init_sem(data))
-		return (1);
 	while (i < (size_t)data->nbr_philo)
 	{
 		data->philo[i].data = data;

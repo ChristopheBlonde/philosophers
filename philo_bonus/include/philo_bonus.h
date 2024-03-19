@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:48 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/18 15:07:59 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:30:23 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	sem_t	*write;
 	sem_t	*forks;
 	sem_t	*died;
+	sem_t	*kill;
 }	t_data;
 
 /* utils */
