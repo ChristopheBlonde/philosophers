@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:13:21 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/19 18:21:11 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/20 10:12:56 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	*ft_kill(void *data)
 	int		i;
 
 	d = (t_data *)data;
-
 	i = 0;
 	sem_wait(d->kill);
 	while (i < d->nbr_philo)
 	{
-		kill(d->philo[i].id, 9);
+		if (d->philo[i].id)
+			kill(d->philo[i].id, 9);
 		i++;
 	}
 	return (NULL);
@@ -32,15 +32,14 @@ static void	*ft_kill(void *data)
 static void	ft_wait_pid(t_data *data)
 {
 	int	i;
-	int status;
 
-	i = data->nbr_philo;
-	while (i > 0)
+	i = 0;
+	while (i < data->nbr_philo)
 	{
-		waitpid(-1, &status, 0);
-		i--;
+		wait(&data->philo[i].id);
+		i++;
 	}
-	printf("All has kill");
+	sem_post(data->kill);
 }
 
 int	main(int argc, char *argv[])

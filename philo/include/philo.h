@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:27:35 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/12 16:06:01 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/20 10:22:08 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void		ft_print(t_data *data, int nbr, char *str, char *color);
 /* error */
 int			ft_error_main(int n);
 void		ft_error_parse(int n);
+int			ft_error_init(int n);
 
 /* free struct */
 void		ft_free_data(t_data *data);

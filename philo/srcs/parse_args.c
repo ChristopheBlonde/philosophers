@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 18:32:47 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/04 14:42:26 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:12:16 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ static int	ft_check_value(t_data *data, char *value, int index)
 		data->time_eat = nbr;
 	if (index == 4)
 		data->time_sleep = nbr;
-	if (index == 5)
+	if (index == 5 && nbr > 0)
 		data->nbr_eat = nbr;
+	else if (index == 5 && nbr <= 0)
+		return (ft_error_init(1));
 	return (1);
 }
 

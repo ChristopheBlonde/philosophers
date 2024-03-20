@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 17:18:44 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/15 12:41:36 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:22:11 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_print(t_data *data, int nbr, char *str, char *color)
 	if (!data->finish)
 	{
 		pthread_mutex_lock(&data->write);
-		printf("%s%ld %d %s\n", color, ft_get_current_time()
+		printf("%s%ld %d %s\033[m\n", color, ft_get_current_time()
 			- data->philo[nbr - 1].start, nbr, str);
 		pthread_mutex_unlock(&data->write);
 	}

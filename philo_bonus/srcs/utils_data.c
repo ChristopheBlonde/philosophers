@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:04:45 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/19 16:19:35 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/20 10:13:45 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,36 +40,10 @@ int	ft_init_sem(t_data *data)
 	data->forks = sem_open("/forks", O_CREAT, S_IRWXU, data->nbr_philo);
 	data->died = sem_open("/died", O_CREAT, S_IRWXU, 1);
 	data->kill = sem_open("/kill", O_CREAT, S_IRWXU, 0);
-
 	if (!data->write || !data->meal || !data->forks || !data->died
 		|| !data->kill)
 		return (1);
 	return (0);
-}
-
-static void	ft_kill_pid(t_data *data)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	status = 0;
-	while (i < data->nbr_philo)
-	{
-		waitpid(-1, &status, 0);
-		if (status != 0)
-		{
-			i = 0;
-			while (i < data->nbr_philo)
-			{
-				if (data->philo[i].id)
-					kill(data->philo[i].id, 9);
-				i++;
-			}
-			break ;
-		}
-		i++;
-	}
 }
 
 void	ft_sem_close(t_data *data)
@@ -104,7 +78,6 @@ void	ft_sem_close(t_data *data)
 void	ft_free_struct(t_data *data)
 {
 	ft_sem_close(data);
-	ft_kill_pid(data);
 	if (data->philo)
 	{
 		free(data->philo);
