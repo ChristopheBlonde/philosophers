@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:18:53 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/21 10:15:59 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:03:27 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	ft_routine(t_philo *philo)
 		NULL, ft_death_checker, philo);
 	pthread_detach(philo->check_death);
 	if (philo->nbr % 2)
-		usleep(10000);
+		usleep(15000);
 	while (1)
 	{
 		if (philo->nbr_meal > 0 && philo->nbr == 1)
