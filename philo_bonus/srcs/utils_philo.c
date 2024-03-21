@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:18:53 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/21 10:03:26 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/21 10:15:59 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_print(t_philo *philo, char *str, char *color)
 {
 	sem_wait(philo->data->write);
 	ft_putstr_fd(color, 1);
-	ft_putnbr_fd(ft_get_current_time() - philo->start, 1);
+	ft_putnbr_fd(ft_get_current_time() - philo->data->start, 1);
 	write(1, " ", 1);
 	ft_putnbr_fd(philo->nbr, 1);
 	write(1, " ", 1);
@@ -102,11 +102,11 @@ int	ft_init_philo(t_data *data)
 	size_t	i;
 
 	i = 0;
+	data->start = ft_get_current_time();
 	while (i < (size_t)data->nbr_philo)
 	{
 		data->philo[i].data = data;
 		data->philo[i].nbr = i + 1;
-		data->philo[i].start = ft_get_current_time();
 		data->philo[i].last_meal = 0;
 		data->philo[i].nbr_meal = 0;
 		data->philo[i].id = fork();

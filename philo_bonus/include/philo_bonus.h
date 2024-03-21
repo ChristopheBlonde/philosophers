@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:48 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/21 09:31:49 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/21 10:12:54 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo
 	struct s_data	*data;
 	pid_t			id;
 	int				nbr;
-	size_t			start;
 	size_t			last_meal;
 	int				nbr_meal;
 	pthread_t		check_death;
@@ -44,6 +43,7 @@ typedef struct s_data
 	size_t	time_eat;
 	size_t	time_sleep;
 	size_t	time_die;
+	size_t	start;
 	int		finish;
 	t_philo	*philo;
 	sem_t	*meal;
