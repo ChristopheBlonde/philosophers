@@ -6,7 +6,7 @@
 /*   By: cblonde <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:00:48 by cblonde           #+#    #+#             */
-/*   Updated: 2024/03/19 14:30:23 by cblonde          ###   ########.fr       */
+/*   Updated: 2024/03/21 09:31:49 by cblonde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void		ft_putendl_fd(char *str, int fd);
 void		*ft_calloc(size_t count, size_t size);
 size_t		ft_get_current_time(void);
 int			ft_usleep(size_t time_to_wait);
+void		ft_putendl_fd(char *s, int fd);
+void		ft_putnbr_fd(int n, int fd);
+void		ft_putstr_fd(char *s, int fd);
 
 /* data */
 int			ft_check_args(int argc, char *argv[], t_data *data);
